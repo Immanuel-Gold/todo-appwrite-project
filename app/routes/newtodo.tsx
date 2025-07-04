@@ -15,8 +15,8 @@ export const action = async ({ request }: ActionFunctionArgs) => {
     }
 
     await databases.createDocument(
-      "684506be003e5f356bcc",
-      "684506d70020b2852d65",
+    process.env.APPWRITE_DATABASE_ID as string,
+      process.env.APPWRITE_COLLECTION_ID as string,
       ID.unique(),
       { todo }
     );

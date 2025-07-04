@@ -5,8 +5,8 @@ import { Link, NavLink } from "react-router";
 
 export const loader = async () => {
   return await databases.listDocuments(
-    "684506be003e5f356bcc",
-    "684506d70020b2852d65"
+     process.env.APPWRITE_DATABASE_ID as string,
+      process.env.APPWRITE_COLLECTION_ID as string,
   );
 };
 
@@ -27,7 +27,7 @@ const alltodos = ({ loaderData }: Route.ComponentProps) => {
         </Link>
       </section>
       {loaderData.documents?.map((todo: { $id: string; todo: string }) => (
-        <Link to={`/todos/${todo.$id}`} className="-">
+        <Link to={`/todos/${todo.$id}`} className="" key={todo.$id}>
           <h3 className="text-[1.6rem] font-[600] text-[#f1f1f1]">
             {todo.todo}
           </h3>

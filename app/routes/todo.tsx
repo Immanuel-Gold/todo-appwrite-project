@@ -7,8 +7,8 @@ export const loader = async ({ params }: Route.LoaderArgs) => {
   const id = params.id;
 
   const todo = await databases.getDocument(
-    "684506be003e5f356bcc",
-    "684506d70020b2852d65",
+      process.env.APPWRITE_DATABASE_ID as string,
+      process.env.APPWRITE_COLLECTION_ID as string,
     id
   );
 
@@ -29,18 +29,18 @@ export const action = async ({ request, params }: ActionFunctionArgs) => {
 
   if (intent === "update") {
     const response = await databases.updateDocument(
-      "684506be003e5f356bcc",
-      "684506d70020b2852d65",
-      params.id,
+    process.env.APPWRITE_DATABASE_ID as string,
+      process.env.APPWRITE_COLLECTION_ID as string,
+      params.id as string,
       { todo }
     );
 
     return { updated: true };
   } else if (intent === "delete") {
     const response = await databases.deleteDocument(
-      "684506be003e5f356bcc",
-      "684506d70020b2852d65",
-      id
+         process.env.APPWRITE_DATABASE_ID as string,
+      process.env.APPWRITE_COLLECTION_ID as string,
+      params.id as string
     );
 
     return redirect("/");
